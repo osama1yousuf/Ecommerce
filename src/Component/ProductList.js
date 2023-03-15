@@ -3,7 +3,7 @@ import SingleCard from "./SingleCard";
 import { Row, Col } from 'reactstrap'
 import { totalProducts,addToCart} from "../Pages/Slice/productSlice";
 import {useDispatch,useSelector} from 'react-redux'
-import { addItem , addQuantiy} from "../Pages/Slice/cartSlice";
+import { addItem , addQuantiy, increaseCartQuantity} from "../Pages/Slice/cartSlice";
 const ProductList = (props) => {
     const cartItem = useSelector((state)=> {
         return state.cart.cartItem
@@ -16,13 +16,15 @@ const ProductList = (props) => {
         
         const val = cartItem.find((item)=> item.id === e.id)
         if (val) {
-            dispatch(addQuantiy(e.id))
+            dispatch(increaseCartQuantity(e.id))
         }else{
             dispatch(addItem({
                 id:e.id,
                 title:e.title,
+                count:e.rating.count - 1, 
                 quantity:1,
-                price:e.price
+                price:e.price,
+                totalPrice:e.price
             }))
         }
     }else{

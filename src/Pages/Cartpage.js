@@ -18,16 +18,34 @@ import { useSelector,useDispatch } from "react-redux";
 import Header from "../Component/Header";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { decreaseQunatity, increaseQuantity } from "./Slice/productSlice";
+import { decreaseCartQuantity, dropItem, increaseCartQuantity } from "./Slice/cartSlice";
 
 const CartPage = () => {
     const dispatch = useDispatch()
-    const ProductList = useSelector(state => state.product.ProductList)
     const cartItems = useSelector(state => state.cart.cartItem);
+    const totalQuantity = useSelector(state=> state.cart.totalQuantity)
+    const totalAmount = useSelector(state=> state.cart.totalAmount)
 const incquan =(e)=>{
 dispatch(increaseQuantity(e.id))
+const val = cartItems.find((item)=>item.id === e.id)
+if (val.count > 0) {
+    dispatch(increaseCartQuantity(val.id))
+}else{
+    window.alert(`${val.title} has no more stock`)
+}
 }
 const dicquan =(e)=>{
-  dispatch(decreaseQunatity(e.id))
+    const val = cartItems.find((item)=> item.id === e.id)
+    if (val.quantity > 0) {
+        dispatch(decreaseCartQuantity(e.id))
+    }else{
+        dispatch(dropItem(e.id))
+    }
+    if (val.quantity > 0) {
+        dispatch(decreaseQunatity(val.id))
+    }else{
+        // window.alert(`${val.title} has no more stock`)
+    }
 }
     return (
         <div>
@@ -54,11 +72,19 @@ const dicquan =(e)=>{
                                             {val.quantity}
                                             <CiCircleMinus style={{fontSize:"28px"}} onClick={(e)=> dicquan(val)} />
                                         </td>
-                                        <td>{val.price}</td>
+                                        <td>{val.totalPrice}</td>
                                     </tr>
                                 )
                             })}
                         </tbody>
+                        <thead>
+                            <tr>
+                                <th scope="col">Total Qunatity</th>
+                                <th scope="col">{totalQuantity}</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">{totalAmount}</th>
+                            </tr>
+                        </thead>
                     </table>
                     :
                     ''
