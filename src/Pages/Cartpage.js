@@ -1,19 +1,4 @@
-// import React from "react";
-// import {useSelector , useDispatch} from 'react-redux'
-// import Header from "../Component/Header";
-// const Cartpage = ()=>{
-//     const cartItem = useSelector((state)=>{
-//         console.log("state.cart.cartItem",state.cart.cartItem);
-//         return state.cart.cartItem
-//     })
-// return(
-//     <Header/>
-// )
-// }
-
-// export default Cartpage
 import React from "react";
-import { Row } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../Component/Header";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
@@ -40,11 +25,11 @@ const CartPage = () => {
   };
   const dicquan = (e) => {
     const val = cartItems.find((item) => item.id === e.id);
-    if (val.quantity > 0) {
+    if (val.quantity > 1) {
       dispatch(decreaseCartQuantity(val.id));
       dispatch(decreaseQunatity(val.id));
     } else {
-      dispatch(dropItem(val.id));
+      dispatch(dropItem(val));
     }
   };
   return (

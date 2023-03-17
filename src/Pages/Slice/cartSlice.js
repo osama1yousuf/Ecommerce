@@ -35,12 +35,14 @@ const cartSlice = createSlice({
       }
     },
     dropItem(state, action) {
-      const val = state.cartItem.find((item) => item.id === action.payload);
-      console.log(val);
-      if (val) {
+      const valIndex = state.cartItem.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      if (valIndex !== -1) {
+        const val = state.cartItem[valIndex];
         state.totalQuantity -= val.quantity;
         state.totalAmount -= val.totalPrice;
-        state.cartItem.splice(val, 1);
+        state.cartItem.splice(valIndex, 1);
       }
     },
   },

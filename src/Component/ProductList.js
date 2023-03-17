@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SingleCard from "./SingleCard";
 import { Row, Col } from "reactstrap";
-import { totalProducts, addToCart } from "../Pages/Slice/productSlice";
+import { addToCart } from "../Pages/Slice/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addItem,
-  addQuantiy,
-  increaseCartQuantity,
-} from "../Pages/Slice/cartSlice";
-const ProductList = (props) => {
+import { addItem, increaseCartQuantity } from "../Pages/Slice/cartSlice";
+const ProductList = () => {
   const cartItem = useSelector((state) => {
     return state.cart.cartItem;
   });
   const dispatch = useDispatch();
+  const productList = useSelector((state) => {
+    return state.product.productList;
+  });
+
   const handleClick = (e) => {
     // console.log(e);
     if (e.rating.count > 0) {
@@ -39,7 +39,7 @@ const ProductList = (props) => {
   };
   return (
     <Row xs={1} className="m-5">
-      {props.productList.map((part, index) => {
+      {productList.map((part, index) => {
         return (
           <Col key={part.id} xs={4}>
             <SingleCard

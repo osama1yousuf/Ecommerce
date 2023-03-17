@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import {
   Collapse,
   Navbar,
@@ -7,13 +7,7 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-} from 'reactstrap';
+} from "reactstrap";
 
 function Header(args) {
   const [isOpen, setIsOpen] = useState(false);
@@ -22,20 +16,22 @@ function Header(args) {
 
   return (
     <div>
-      <Navbar color="light" light expand='md'>
+      <Navbar color="light" light expand="md">
         <NavbarBrand>
-          <Link className='navbar-brand' to='/'>
-          E-commerce
+          <Link className="navbar-brand" to="/">
+            E-commerce
           </Link>
-          </NavbarBrand>
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
-              <Link className='nav-link' to="/">Home</Link>
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
             </NavItem>
             <NavItem>
-              <Link className='nav-link' to="/cart">
+              <Link className="nav-link" to="/cart">
                 Cart
               </Link>
             </NavItem>
