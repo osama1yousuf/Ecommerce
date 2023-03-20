@@ -25,10 +25,11 @@ const CartPage = () => {
   };
   const dicquan = (e) => {
     const val = cartItems.find((item) => item.id === e.id);
-    if (val.quantity > 1) {
+    if (val.quantity > 0) {
       dispatch(decreaseCartQuantity(val.id));
       dispatch(decreaseQunatity(val.id));
     } else {
+      dispatch(decreaseQunatity(val.id));
       dispatch(dropItem(val));
     }
   };

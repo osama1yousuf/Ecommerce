@@ -3,6 +3,7 @@ import SingleCard from "./SingleCard";
 import { Row, Col } from "reactstrap";
 import { addToCart } from "../Pages/Slice/productSlice";
 import { useDispatch, useSelector } from "react-redux";
+
 import { addItem, increaseCartQuantity } from "../Pages/Slice/cartSlice";
 const ProductList = () => {
   const cartItem = useSelector((state) => {
